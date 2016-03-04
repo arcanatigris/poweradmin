@@ -45,14 +45,6 @@ echo "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\
 echo " </head>\n";
 echo " <body>\n";
 
-if (file_exists('inc/custom_header.inc.php')) {
-    include('inc/custom_header.inc.php');
-} else {
-    echo "  <h1>" . $iface_title . "</h1>\n";
-}
-
-// this config variable is used only for development, do not use it in production
-//if (($ignore_install_dir == NULL || $ignore_install_dir == false) && file_exists ( 'install' )) {
 if (file_exists('install')) {
     echo "<div>\n";
     error(ERR_INSTALL_DIR_EXISTS);
@@ -72,6 +64,34 @@ if (file_exists('install')) {
         error(ERR_DEFAULT_CRYPTOKEY_USED);
         echo "<br>";
     }
+
+    echo "<ul id=\"dropdown1\" class=\"dropdown-content\">\n";
+    echo "<li><a href=\"users.php\">" . _('User administration') . "</a></li>\n<li class=\"divider\"></li>\n";
+    if ($_SESSION ["auth_used"] != "ldap") {
+        echo " <li><a href=\"change_password.php\">" . _('Change password') . "</a></li>\n";
+    }
+    echo "<li><a href=\"index.php?logout\">" . _('Logout') . "</a></li>\n</ul>\n";
+    echo "<ul id=\"dropdown2\" class=\"dropdown-content\">\n";
+    if ($perm_view_zone_own == "1" || $perm_view_zone_other == "1") { echo "<li><a href=\"list_zones.php\">" . _('List zones') . "</a></li>\n"; }
+    if ($perm_zone_master_add) { echo " <li><a href=\"list_zone_templ.php\">" . _('List zone templates') . "</a></li>\n"; }
+    if ($perm_zone_master_add) { echo " <li><a href=\"add_zone_master.php\">" . _('Add master zone') . "</a></li>\n"; }
+    if ($perm_zone_slave_add) { echo " <li><a href=\"add_zone_slave.php\">" . _('Add slave zone') . "</a></li>\n"; }
+    if ($perm_zone_master_add) { echo " <li><a href=\"bulk_registration.php\">" . _('Bulk registration') . "</a></li>\n"; }
+    echo "</ul>\n";
+    echo "<nav>
+    <div class=\"nav-wrapper\">
+    <a href=\"index.php\" class=\"brand-logo\">" . $iface_title . "</a>
+    <ul class=\"right hide-on-med-and-down\">
+    <li><a href=\"index.php\">Home</a></li>
+    <li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown2\">Zone Management<i class=\"material-icons right\">arrow_drop_down</i></a></li>
+    <li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">" . $_SESSION["name"] . "<i class=\"material-icons right\">arrow_drop_down</i></a></li>
+    </ul>
+    </div>
+    </nav>";
+
+// this config variable is used only for development, do not use it in production
+//if (($ignore_install_dir == NULL || $ignore_install_dir == false) && file_exists ( 'install' )) {
+
 
     echo "    <div class=\"menu\">\n";
     echo "    <span class=\"menuitem\"><a href=\"index.php\">" . _('Index') . "</a></span>\n";
