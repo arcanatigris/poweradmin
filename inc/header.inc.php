@@ -35,12 +35,14 @@ global $ignore_install_dir;
 global $session_key;
 
 header('Content-type: text/html; charset=utf-8');
-echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">\n";
+echo "<!DOCTYPE html>\n";
 echo "<html>\n";
 echo " <head>\n";
 echo "  <title>" . $iface_title . "</title>\n";
-echo "  <link rel=stylesheet href=\"style/" . $iface_style . ".css\" type=\"text/css\">\n";
+echo "  <link href=\"http://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n"
+echo "  <link rel=stylesheet href=\"css/materialize.min.css\" type=\"text/css\" media=\"screen,projection\">\n";
 echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n";
+echo "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n"
 echo " </head>\n";
 echo " <body>\n";
 

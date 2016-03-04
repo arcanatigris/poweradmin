@@ -48,6 +48,8 @@ if (file_exists('inc/custom_footer.inc.php')) {
     include('inc/custom_footer.inc.php');
 }
 ?>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
 
